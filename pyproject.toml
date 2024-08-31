@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "django-desk"
+version = "0.1.0"
+description = ""
+authors = ["Adão Santos <adaosantosn@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.1"
+django-stdimage = "^6.0.2"
+validate-docbr = "^1.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,72 @@
+{% load i18n %}
+{% load static %}
+
+<script src="{% static 'vendors/scripts/validators.js' %}"></script>
+
+<script>
+  $(function() {
+    var form = $("#form");
+
+    $.validator.addMethod("document_number", function(value, element) {
+        // Remove a máscara de formatação (pontos, traços, barras)
+        const unmaskedValue = value.replace(/[^\d]+/g, '');
+
+        // Verifica se o valor tem mais de 11 dígitos
+        if (unmaskedValue.length > 11) {
+            return validateCNPJ(unmaskedValue); // Chame a função de validação de CNPJ
+        } else {
+            return validateCPF(unmaskedValue); // Chame a função de validação de CPF
+        }
+    }, "Por favor, insira um CPF ou CNPJ válido");
+
+    form.validate({
+        rules: {
+            full_name: "required",
+            document_number: {
+                required: true,
+                document_number: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            password1: {
+                required: true,
+                minlength: 5
+            },
+            password2: {
+                required: true,
+                minlength: 5,
+                equalTo: "#password"
+            },
+            category: "required",
+            city: "required",
+            person_type: "required",
+        },
+        messages: {
+            full_name: "Por favor, insira seu nome",
+            email: "Por favor, insira um endereço de email válido",
+            document_number: {
+                required: "Por favor, insira seu CPF ou CNPJ",
+                cpfOrCnpj: "Por favor, insira um CPF ou CNPJ válido"
+            },
+            password1: {
+                required: "Por favor, forneça uma senha",
+                minlength: "Sua senha deve ter pelo menos 5 caracteres"
+            },
+            password2: {
+                required: "Por favor, confirme sua senha",
+                minlength: "Sua senha deve ter pelo menos 5 caracteres",
+                equalTo: "Por favor, insira a mesma senha que acima"
+            },
+            address: "Por favor, insira seu endereço",
+            cellphone: "Por favor, insira seu telefone",
+            category: "Por favor, selecione uma categoria",
+            city: "Por favor, selecione uma cidade",
+            person_type: "Por favor, selecione um tipo de pessoa",
+        }
+    });
+
+})
+
+</script>

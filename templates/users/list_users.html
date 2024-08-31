@@ -1,0 +1,50 @@
+{% extends '../bases/base_list.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block main_container %}
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="title">
+          <h4>{% trans 'Users' %}</h4>
+        </div>
+        <nav aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'home' %}">{% trans 'Home' %}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {% trans 'Users' %}
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class="col-md-6 col-sm-12 text-right">
+        <div class="dropdown">
+          <a class="btn btn-primary" href="{% url 'users-create' %}"><i class="icon-copy fa fa-user-plus" aria-hidden="true"></i> {% trans 'Add User' %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Simple Datatable start -->
+  <div class="card-box mb-30">
+    <div class="pd-20"></div>
+    <div class="pb-20">
+      <table class="data-table table stripe hover nowrap" id="table-paginator">
+        <thead>
+          <tr>
+            <th class="table-plus datatable-nosort">Name</th>
+            <th>Age</th>
+            <th>Office</th>
+            <th>Address</th>
+            <th>Start Date</th>
+            <th class="datatable-nosort">Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Simple Datatable End -->
+{% endblock %}

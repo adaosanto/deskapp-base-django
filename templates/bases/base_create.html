@@ -1,0 +1,64 @@
+{% extends '../bases/base_dashboard.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block main_container %}
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="title">
+          <h4>{% trans 'Create User' %}</h4>
+        </div>
+        <nav aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'home' %}">{% trans 'Home' %}</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'users-list' %}">{% trans 'Users' %}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {% trans 'Create User' %}
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block additional_scripts %}
+  <script src="{% static 'src/plugins/jquery-Mask/jquery.mask.js' %}"></script>
+  <script language="javascript">
+    // Masks
+    var cellphoneMask = function (val) {
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009'
+      },
+      spOptionsCellphone = {
+        onKeyPress: function (val, e, field, options) {
+          field.mask(cellphoneMask.apply({}, arguments), options)
+        },
+        placeholder: '(__) _________'
+      }
+    
+    var documentNumberMask = function (val) {
+      return val.replace(/\D/g, '').length <= 11 ? '000.000.000-000' : '00.000.000/0000-00'
+    }
+    spOptionsdocumentNumber = {
+      onKeyPress: function (val, e, field, options) {
+        field.mask(documentNumberMask.apply({}, arguments), options)
+      }
+    }
+    
+    $(document).ready(function () {
+      $('#val').mask('000.000.000-00')
+      $('#id_document_number').mask(documentNumberMask, spOptionsdocumentNumber)
+      $('#nascimento').mask('00/00/0000')
+      $('#telefone').mask(cellphoneMask, spOptionsCellphone)
+      $('#telefone2').mask(cellphoneMask, spOptionsCellphone)
+      $('#id_cellphone').mask(cellphoneMask, spOptionsCellphone)
+      $('#id_phone').mask(cellphoneMask, spOptionsCellphone)
+      $('#id_phonenumber').mask(cellphoneMask, spOptionsCellphone)
+    })
+  </script>
+{% endblock %}
