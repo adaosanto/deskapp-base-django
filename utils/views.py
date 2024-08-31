@@ -19,6 +19,8 @@ class LoginRequiredMixin(object):
 
 
 class BasePaginator(TemplateView):
+    max_records_per_page = 500
+
     def get_queryset(self, request, *args, **kwargs):
         return self.model.objects.all()
 
@@ -36,6 +38,9 @@ class BasePaginator(TemplateView):
                 start = 0
             if not length:
                 length = 12
+
+            if int(length) > self.max_records_per_page:
+                length = self.max_records_per_page
 
             page_id = (int(start) / int(length)) + 1
 

@@ -1,20 +1,34 @@
-$('document').ready(function(){
+$('document').ready(function () {
 	$('.data-table').DataTable({
+		destroy: true,
 		scrollCollapse: true,
 		autoWidth: false,
+		serverSide: true,
+		processing: false,
+		ajax: {
+			url: API_DATA_LIST_URL,
+			type: 'GET',
+			contentType: 'application/json',
+			dataType: 'json',
+			dataSrc: function (json) {
+				for (var i = 0, ien = json.data.length; i < ien; i++) {
+					let id = json.data[i][0];
+
+					json.data[i].push('<div class="dropdown show">' + '<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="true">' + '<i class="dw dw-more"></i>' + '</a>' + '<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' + '<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>' + '<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>' + '<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>' + '</div>' + '</div>')
+				}
+				return json.data;
+			},
+
+		},
+
 		responsive: true,
 		columnDefs: [{
 			targets: "datatable-nosort",
 			orderable: false,
 		}],
-		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, 500]],
 		"language": {
-			"info": "_START_-_END_ of _TOTAL_ entries",
-			searchPlaceholder: "Search",
-			paginate: {
-				next: '<i class="ion-chevron-right"></i>',
-				previous: '<i class="ion-chevron-left"></i>'  
-			}
+			url: 'https://cdn.datatables.net/plug-ins/2.1.4/i18n/pt-BR.json',
 		},
 	});
 
@@ -32,12 +46,12 @@ $('document').ready(function(){
 			searchPlaceholder: "Search",
 			paginate: {
 				next: '<i class="ion-chevron-right"></i>',
-				previous: '<i class="ion-chevron-left"></i>'  
+				previous: '<i class="ion-chevron-left"></i>'
 			}
 		},
 		dom: 'Bfrtp',
 		buttons: [
-		'copy', 'csv', 'pdf', 'print'
+			'copy', 'csv', 'pdf', 'print'
 		]
 	});
 
@@ -66,7 +80,7 @@ $('document').ready(function(){
 			searchPlaceholder: "Search",
 			paginate: {
 				next: '<i class="ion-chevron-right"></i>',
-				previous: '<i class="ion-chevron-left"></i>'  
+				previous: '<i class="ion-chevron-left"></i>'
 			}
 		},
 		'columnDefs': [{
@@ -74,22 +88,22 @@ $('document').ready(function(){
 			'searchable': false,
 			'orderable': false,
 			'className': 'dt-body-center',
-			'render': function (data, type, full, meta){
+			'render': function (data, type, full, meta) {
 				return '<div class="dt-checkbox"><input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '"><span class="dt-checkbox-label"></span></div>';
 			}
 		}],
 		'order': [[1, 'asc']]
 	});
 
-	$('#example-select-all').on('click', function(){
+	$('#example-select-all').on('click', function () {
 		var rows = table.rows({ 'search': 'applied' }).nodes();
 		$('input[type="checkbox"]', rows).prop('checked', this.checked);
 	});
 
-	$('.checkbox-datatable tbody').on('change', 'input[type="checkbox"]', function(){
-		if(!this.checked){
+	$('.checkbox-datatable tbody').on('change', 'input[type="checkbox"]', function () {
+		if (!this.checked) {
 			var el = $('#example-select-all').get(0);
-			if(el && el.checked && ('indeterminate' in el)){
+			if (el && el.checked && ('indeterminate' in el)) {
 				el.indeterminate = true;
 			}
 		}

@@ -27,7 +27,7 @@ class LoginView(LoginView):
 class ListUsersView(LoginRequiredMixin, BasePaginator):
     template_name = "users/list_users.html"
     model = get_user_model()
-    fields = ["id", "full_name", "email", "cellphone"]
+    fields = ["id", "full_name", "document_number", "email", "cellphone", "city.name"]
 
 
 class CreateUsersView(LoginRequiredMixin, CreateView):

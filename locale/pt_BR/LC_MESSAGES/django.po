@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-23 13:52-0400\n"
+"POT-Creation-Date: 2024-08-31 17:06-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,169 +18,151 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cities/models.py:6
+#: cities/models.py:6 templates/users/list_users.html:39
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: cities/models.py:7
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: cities/models.py:9
 msgid "Created At"
-msgstr ""
+msgstr "Criado em"
 
 #: cities/models.py:10 users/models.py:103
 msgid "Updated At"
-msgstr ""
+msgstr "Atualiado em"
 
-#: templates/bases/base_dashboard.html:286
-#: templates/bases/base_dashboard.html:633
-msgid "Profile"
-msgstr "Perfil"
-
-#: templates/bases/base_dashboard.html:289
-msgid "Settings"
-msgstr "Configurações"
-
-#: templates/bases/base_dashboard.html:292
-msgid "Help"
-msgstr "Ajuda"
-
-#: templates/bases/base_dashboard.html:295
-msgid "Log out"
-msgstr "Sair"
-
-#: templates/bases/base_dashboard.html:316
-msgid "Layout Settings"
-msgstr "Configurações de layout"
-
-#: templates/bases/base_dashboard.html:318
-msgid "User Interface Settings"
-msgstr "Configurações da interface do usuário"
-
-#: templates/bases/base_dashboard.html:327
-msgid "Header Background"
-msgstr "Cor de fundo do cabeçalho"
-
-#: templates/bases/base_dashboard.html:332
-#: templates/bases/base_dashboard.html:346
-msgid "White"
-msgstr "Branco"
-
-#: templates/bases/base_dashboard.html:337
-#: templates/bases/base_dashboard.html:351
-msgid "Dark"
-msgstr "Preto"
-
-#: templates/bases/base_dashboard.html:341
-msgid "Sidebar Background"
-msgstr "Cor de fundo da barra lateral"
-
-#: templates/bases/base_dashboard.html:355
-msgid "Menu Dropdown Icon"
-msgstr "Ícones suspenso do menu"
-
-#: templates/bases/base_dashboard.html:396
-msgid "Menu List Icon"
-msgstr "Ícones da lista de menus"
-
-#: templates/bases/base_dashboard.html:476
-msgid "Reset Settings"
-msgstr "Resetar configurações"
-
-#: templates/bases/base_dashboard.html:626
-msgid "Blank"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:627
-msgid "Contact Directory"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:628
-msgid "Blog"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:629
-msgid "Blog Detail"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:630
-msgid "Product"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:631
-msgid "Product Detail"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:632
-msgid "FAQ"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:634
-msgid "Gallery"
-msgstr ""
-
-#: templates/bases/base_dashboard.html:635
-msgid "Pricing Tables"
-msgstr ""
-
-#: templates/users/_validators.html:8
-msgid "Email invalid."
-msgstr "Email é inválido."
-
-#: templates/users/_validators.html:16
-msgid "Name invalid."
-msgstr "Nome é inválido, no mínimo 5 caracteres."
-
-#: templates/users/_validators.html:21
-msgid "Phone number invalid."
-msgstr "Número de telefone é inválido."
-
-#: templates/users/_validators.html:41
-msgid "The password is easy. Consider using a more secure password."
-msgstr "A senha é muito fácil."
-
-#: templates/users/_validators.html:47
-msgid "Passwords dont match"
-msgstr "As senhas não coincidem."
-
-#: templates/users/_validators.html:52
-msgid "is required."
-msgstr "é obrigatório."
-
-#: templates/users/_validators.html:59
-msgid "Document invalid."
-msgstr "CPF/CNPJ não é válido."
-
-#: templates/users/_validators.html:71
-msgid "Name must have at least 5 characters."
-msgstr ""
-
-#: templates/users/_validators.html:71 users/models.py:78
-msgid "Category"
-msgstr "Categoria"
-
-#: templates/users/create_user.html:10 templates/users/create_user.html:21
+#: templates/bases/base_create.html:10 templates/bases/base_create.html:21
+#: templates/users/create_user.html:12 templates/users/create_user.html:23
 msgid "Create User"
 msgstr ""
 
-#: templates/users/create_user.html:15 templates/users/list_users.html:15
+#: templates/bases/base_create.html:15 templates/users/create_user.html:17
+#: templates/users/list_users.html:15
 msgid "Home"
-msgstr ""
+msgstr "Inicio"
 
-#: templates/users/create_user.html:18 templates/users/list_users.html:10
-#: templates/users/list_users.html:18
+#: templates/bases/base_create.html:18 templates/users/create_user.html:20
+#: templates/users/list_users.html:10 templates/users/list_users.html:18
 msgid "Users"
+msgstr "Usuários"
+
+#: templates/bases/base_dashboard.html:183
+#: templates/bases/base_dashboard.html:493
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/bases/base_dashboard.html:184
+msgid "Settings"
+msgstr "Configurações"
+
+#: templates/bases/base_dashboard.html:185
+msgid "Help"
+msgstr "Ajuda"
+
+#: templates/bases/base_dashboard.html:186
+msgid "Log out"
+msgstr "Sair"
+
+#: templates/bases/base_dashboard.html:204
+msgid "Layout Settings"
+msgstr "Configurações de layout"
+
+#: templates/bases/base_dashboard.html:205
+msgid "User Interface Settings"
+msgstr "Configurações da interface do usuário"
+
+#: templates/bases/base_dashboard.html:213
+msgid "Header Background"
+msgstr "Cor de fundo do cabeçalho"
+
+#: templates/bases/base_dashboard.html:215
+#: templates/bases/base_dashboard.html:221
+msgid "White"
+msgstr "Branco"
+
+#: templates/bases/base_dashboard.html:216
+#: templates/bases/base_dashboard.html:222
+msgid "Dark"
+msgstr "Preto"
+
+#: templates/bases/base_dashboard.html:219
+msgid "Sidebar Background"
+msgstr "Cor de fundo da barra lateral"
+
+#: templates/bases/base_dashboard.html:225
+msgid "Menu Dropdown Icon"
+msgstr "Ícones suspenso do menu"
+
+#: templates/bases/base_dashboard.html:241
+msgid "Menu List Icon"
+msgstr "Ícones da lista de menus"
+
+#: templates/bases/base_dashboard.html:270
+msgid "Reset Settings"
+msgstr "Resetar configurações"
+
+#: templates/bases/base_dashboard.html:472
+msgid "Blank"
 msgstr ""
 
-#: templates/users/create_user.html:43
+#: templates/bases/base_dashboard.html:475
+msgid "Contact Directory"
+msgstr ""
+
+#: templates/bases/base_dashboard.html:478
+msgid "Blog"
+msgstr ""
+
+#: templates/bases/base_dashboard.html:481
+msgid "Blog Detail"
+msgstr ""
+
+#: templates/bases/base_dashboard.html:484
+msgid "Product"
+msgstr ""
+
+#: templates/bases/base_dashboard.html:487
+msgid "Product Detail"
+msgstr ""
+
+#: templates/bases/base_dashboard.html:490
+msgid "FAQ"
+msgstr ""
+
+#: templates/bases/base_dashboard.html:496
+msgid "Gallery"
+msgstr ""
+
+#: templates/bases/base_dashboard.html:499
+msgid "Pricing Tables"
+msgstr ""
+
+#: templates/users/create_user.html:44
 msgid "Save"
 msgstr "Salvar"
 
-#: templates/users/list_users.html:32
+#: templates/users/list_users.html:25
 msgid "Add User"
 msgstr "Adicionar Usuário"
+
+#: templates/users/list_users.html:42
+msgid "Document Number"
+msgstr "CPF/CNPJ"
+
+#: templates/users/list_users.html:45
+msgid "E-mail"
+msgstr "E-mail"
+
+#: templates/users/list_users.html:48
+msgid "Cell Phone"
+msgstr "Número de Telefone"
+
+#: templates/users/list_users.html:51
+msgid "City"
+msgstr "Cidade"
 
 #: templates/users/login.html:91
 msgid "Register"
@@ -210,29 +192,29 @@ msgstr "OU"
 msgid "Register To Create Account"
 msgstr "Criar uma nova conta"
 
-#: users/forms.py:34
-msgid "category"
-msgstr "Categoria"
-
-#: users/forms.py:52
+#: users/forms.py:67
 msgid "Phone number must have 10 or 11 digits."
 msgstr ""
 
-#: users/forms.py:55
+#: users/forms.py:70 users/forms.py:76 users/forms.py:95
 msgid "This field is required."
 msgstr "O campo é obrigatório."
 
-#: users/forms.py:69
+#: users/forms.py:86
+msgid "Document invalid."
+msgstr "CPF/CNPJ não é válido."
+
+#: users/forms.py:115
 #, fuzzy
 #| msgid "Forgot Password"
 msgid "Password"
 msgstr "Esqueceu a senha"
 
-#: users/forms.py:80
+#: users/forms.py:126
 msgid "Please enter a correct email and password."
 msgstr "E-mail ou senha incorretos."
 
-#: users/forms.py:81
+#: users/forms.py:127
 msgid "Account is inactive."
 msgstr ""
 
@@ -280,6 +262,10 @@ msgstr "Cidade"
 msgid "cellphone"
 msgstr "Número de Telefone"
 
+#: users/models.py:78
+msgid "Category"
+msgstr "Categoria"
+
 #: users/models.py:81
 msgid "Image Profile"
 msgstr "Foto de Perfil  "
@@ -317,6 +303,27 @@ msgstr ""
 #: users/models.py:113
 msgid "users"
 msgstr ""
+
+#~ msgid "Email invalid."
+#~ msgstr "Email é inválido."
+
+#~ msgid "Name invalid."
+#~ msgstr "Nome é inválido, no mínimo 5 caracteres."
+
+#~ msgid "Phone number invalid."
+#~ msgstr "Número de telefone é inválido."
+
+#~ msgid "The password is easy. Consider using a more secure password."
+#~ msgstr "A senha é muito fácil."
+
+#~ msgid "Passwords dont match"
+#~ msgstr "As senhas não coincidem."
+
+#~ msgid "is required."
+#~ msgstr "é obrigatório."
+
+#~ msgid "category"
+#~ msgstr "Categoria"
 
 #, fuzzy
 #~| msgid "gender"
