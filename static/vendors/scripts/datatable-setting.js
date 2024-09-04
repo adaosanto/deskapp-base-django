@@ -1,3 +1,5 @@
+
+
 $('document').ready(function () {
 	$('.data-table').DataTable({
 		destroy: true,
@@ -10,11 +12,23 @@ $('document').ready(function () {
 			type: 'GET',
 			contentType: 'application/json',
 			dataType: 'json',
+
 			dataSrc: function (json) {
 				for (var i = 0, ien = json.data.length; i < ien; i++) {
-					let id = json.data[i][0];
+					let id = json.data[i][0]; // Captura o ID do item
 
-					json.data[i].push('<div class="dropdown show">' + '<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="true">' + '<i class="dw dw-more"></i>' + '</a>' + '<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' + '<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>' + '<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>' + '<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>' + '</div>' + '</div>')
+					json.data[i].push(
+						'<div class="dropdown show">' +
+						'<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="true">' +
+						'<i class="dw dw-more"></i>' +
+						'</a>' +
+						'<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
+						'<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>' +
+						'<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>' +
+						'<a class="dropdown-item delete-item" href="#" data-id="' + id + '"><i class="dw dw-delete-3"></i> Delete</a>' +
+						'</div>' +
+						'</div>'
+					);
 				}
 				return json.data;
 			},
@@ -106,6 +120,55 @@ $('document').ready(function () {
 			if (el && el.checked && ('indeterminate' in el)) {
 				el.indeterminate = true;
 			}
+		}
+	});
+});
+
+$(document).on('click', '.delete-item', function (e) {
+	e.preventDefault(); // Impede que o link seja seguido
+
+	let itemId = $(this).data('id'); // Pega o ID do item
+	// Exibe uma confirmação utilizando SweetAlert
+	Swal.fire({
+		title: 'Tem certeza?',
+		text: "Você não poderá reverter isso!",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Sim, deletar!',
+		cancelButtonText: 'Cancelar'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			// Realiza a operação de delete via AJAX ou outra lógica de deleção
+			const crsf = getCookie('csrftoken');
+			$.ajax({
+				url: '/api/users/?user_id=' + itemId, // Substitua com a URL correta
+				type: 'DELETE',
+				headers: {
+					'X-CSRFToken': crsf
+				},
+				success: function (result) {
+					Swal.fire({
+						title: 'Deletado!',
+						text: 'O item foi deletado com sucesso.',
+						icon: 'success'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							// Recarrega a página
+							window.location.reload();
+						}
+					});
+
+				},
+				error: function (xhr, status, error) {
+					Swal.fire(
+						'Erro!',
+						'Ocorreu um erro ao deletar o item.',
+						'error'
+					);
+				}
+			});
 		}
 	});
 });

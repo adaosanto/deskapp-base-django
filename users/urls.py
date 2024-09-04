@@ -1,6 +1,11 @@
 from django.urls import path
 
+from projeto.urls import api
+
+from .services.api import router
 from .views import CreateUsersView, ListUsersView, LoginView, RegisterView
+
+api.add_router("users", router)
 
 urlpatterns = [
     path("create/", CreateUsersView.as_view(), name="users-create"),
