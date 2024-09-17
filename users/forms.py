@@ -22,39 +22,6 @@ class CustomStyleMixin:
         for field_name, field in self.fields.items():
             if field_name not in self.exclude_fields:
                 field.widget.attrs.setdefault("class", "form-control")
-        # self.fields["email"].widget.attrs.update(
-        #     {
-        #         "onblur": "validateEmail(this)",
-        #         "autofocus": False,
-        #     }
-        # )
-        # self.fields["cellphone"].widget.attrs["onblur"] = "validateCellphone(this)"
-        # self.fields["full_name"].widget.attrs["onblur"] = "validateName(this)"
-        # self.fields["document_number"].widget.attrs["onblur"] = "validateDoc(this)"
-        # self.fields["person_type"].widget.attrs.update(
-        #     {
-        #         "class": "custom-select2 form-control",
-        #     }
-        # )
-        # self.fields["city"].widget.attrs.update(
-        #     {
-        #         "class": "custom-select2 form-control",
-        #         "onblur": "validateRequired(this, '%s')" % _("city"),
-        #     }
-        # )
-        # self.fields["category"].widget.attrs.update(
-        #     {
-        #         "class": "custom-select2 form-control",
-        #         "onblur": "validateRequired(this, '%s')" % _("category"),
-        #     }
-        # )
-        # self.fields["password1"].widget.attrs["onblur"] = "validatePassword(this)"
-        # self.fields["password2"].widget.attrs[
-        #     "onblur"
-        # ] = "validateConfirmPassword(this)"
-        # self.fields["groups"].widget.attrs.update(
-        #     {"class": "custom-select2 form-control"}
-        # )
 
 
 class BaseUserValidationMixin(object):
@@ -152,3 +119,6 @@ class CustomUserCreationForm(
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.apply_common_styles()
+
+
+class UserCustomUpdateForm(CustomUserCreationForm): ...

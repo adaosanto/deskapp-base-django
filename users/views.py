@@ -1,14 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView
-from django.forms import BaseModelForm
-from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from utils.views import BasePaginator, LoginRequiredMixin, TemplateView
 
-from .forms import CustomUserCreationForm, UserLoginForm
+from .forms import CustomUserCreationForm, UserCustomUpdateForm, UserLoginForm
 
 
 class LoginView(LoginView):
@@ -28,6 +26,12 @@ class ListUsersView(LoginRequiredMixin, BasePaginator):
     template_name = "users/list_users.html"
     model = get_user_model()
     fields = ["id", "full_name", "document_number", "email", "cellphone", "city.name"]
+
+
+class UpdateUsersView(LoginRequiredMixin, UpdateView):
+    template_name = "users/update_user.html"
+    model = get_user_model()
+    form_class = UserCustomUpdateForm
 
 
 class CreateUsersView(LoginRequiredMixin, CreateView):

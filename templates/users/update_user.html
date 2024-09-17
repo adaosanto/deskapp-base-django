@@ -1,0 +1,50 @@
+{% extends '../bases/base_create.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block main_container %}
+  <script src="{% static 'src/plugins/jquery-Mask/jquery.mask.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/customize.css' %}" />
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="title">
+          <h4>{% trans 'Create User' %}</h4>
+        </div>
+        <nav aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'home' %}">{% trans 'Home' %}</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'users-list' %}">{% trans 'Users' %}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {% trans 'Create User' %}
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="pd-20 card-box mb-30">
+    <div class="pb-20">
+      <script src="{% static 'src/scripts/jquery.min.js' %}"></script>
+
+      <form id="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include '../includes/_render_errors.html' %}
+        {% for field in form %}
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">{{ field.label }}</label>
+            <div class="col-sm-12 col-md-10">{{ field }}</div>
+          </div>
+        {% endfor %}
+        <div class="btn-list dropdown">
+          <button type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"><i class="icon-copy dw dw-add-user"></i> {% trans 'Save' %}</button>
+        </div>
+      </form>
+      {% include './_validators.html' %}
+    </div>
+  </div>
+{% endblock %}

@@ -4,69 +4,96 @@
 <script src="{% static 'vendors/scripts/validators.js' %}"></script>
 
 <script>
-  $(function() {
+ $(function() {
     var form = $("#form");
 
+    // Adicionando o método de validação customizado para CPF/CNPJ
     $.validator.addMethod("document_number", function(value, element) {
-        // Remove a máscara de formatação (pontos, traços, barras)
         const unmaskedValue = value.replace(/[^\d]+/g, '');
-
-        // Verifica se o valor tem mais de 11 dígitos
         if (unmaskedValue.length > 11) {
-            return validateCNPJ(unmaskedValue); // Chame a função de validação de CNPJ
+            return validateCNPJ(unmaskedValue);
         } else {
-            return validateCPF(unmaskedValue); // Chame a função de validação de CPF
+            return validateCPF(unmaskedValue);
         }
     }, "Por favor, insira um CPF ou CNPJ válido");
 
-    form.validate({
-        rules: {
-            full_name: "required",
-            document_number: {
-                required: true,
-                document_number: true
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            password1: {
-                required: true,
-                minlength: 5
-            },
-            password2: {
-                required: true,
-                minlength: 5,
-                equalTo: "#password"
-            },
-            category: "required",
-            city: "required",
-            person_type: "required",
+    // Regras de validação base
+    var validationRules = {
+        full_name: "required",
+        document_number: {
+            required: true,
+            document_number: true
         },
-        messages: {
-            full_name: "Por favor, insira seu nome",
-            email: "Por favor, insira um endereço de email válido",
-            document_number: {
-                required: "Por favor, insira seu CPF ou CNPJ",
-                cpfOrCnpj: "Por favor, insira um CPF ou CNPJ válido"
-            },
-            password1: {
-                required: "Por favor, forneça uma senha",
-                minlength: "Sua senha deve ter pelo menos 5 caracteres"
-            },
-            password2: {
-                required: "Por favor, confirme sua senha",
-                minlength: "Sua senha deve ter pelo menos 5 caracteres",
-                equalTo: "Por favor, insira a mesma senha que acima"
-            },
-            address: "Por favor, insira seu endereço",
-            cellphone: "Por favor, insira seu telefone",
-            category: "Por favor, selecione uma categoria",
-            city: "Por favor, selecione uma cidade",
-            person_type: "Por favor, selecione um tipo de pessoa",
-        }
-    });
+        email: {
+            required: true,
+            email: true
+        },
+        password1: {
+            required: true,
+            minlength: 5
+        },
+        password2: {
+            required: true,
+            minlength: 5,
+            equalTo: "#password1"
+        },
+        category: "required",
+        city: "required",
+        person_type: "required",
+    };
 
-})
+    // Mensagens de validação
+    var validationMessages = {
+        full_name: "Por favor, insira seu nome",
+        email: "Por favor, insira um endereço de email válido",
+        document_number: {
+            required: "Por favor, insira seu CPF ou CNPJ",
+            document_number: "Por favor, insira um CPF ou CNPJ válido"
+        },
+        password1: {
+            required: "Por favor, forneça uma senha",
+            minlength: "Sua senha deve ter pelo menos 5 caracteres"
+        },
+        password2: {
+            required: "Por favor, confirme sua senha",
+            minlength: "Sua senha deve ter pelo menos 5 caracteres",
+            equalTo: "Por favor, insira a mesma senha que acima"
+        },
+        address: "Por favor, insira seu endereço",
+        cellphone: "Por favor, insira seu telefone",
+        category: "Por favor, selecione uma categoria",
+        city: "Por favor, selecione uma cidade",
+        person_type: "Por favor, selecione um tipo de pessoa",
+    };
+
+    // Função para aplicar a validação
+    function applyValidation(isEditMode) {
+        var rules = { ...validationRules };
+
+        // Se for edição, torna as senhas opcionais
+        if (isEditMode) {
+            rules.password2.required = false;
+            rules.password1.required = false;
+        }
+
+        if (form.password1.value) {
+        // Remove a validação equalTo de password2
+            delete rules.password2.equalTo;
+        } else {
+            // Adiciona a validação equalTo apontando para password1
+            rules.password2.equalTo = form.password1.name;
+        }
+
+        form.validate({
+            rules: rules,
+            messages: validationMessages
+        });
+        
+    }
+    // Chame a função passando true para edição ou false para criação
+    var isEditMode = Boolean({{ object.id }});
+    applyValidation(isEditMode);
+});
+
 
 </script>
