@@ -80,6 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     image_profile = StdImageField(
         _("Image Profile"),
         upload_to=get_file_path,
+        blank=True,
         default=None,
         variations={"thumb": {"width": 512, "height": 512, "crop": True}},
         delete_orphans=True,
