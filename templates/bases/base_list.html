@@ -4,8 +4,77 @@
 {% load i18n %}
 
 {% block additional_scripts %}
+  <!-- View modal -->
+  <div class="col-md-4 col-sm-12 mb-30">
+    <div class="modal fade" id="modal-view" tabindex="-1" role="dialog" aria-labelledby="myViewLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <script>
+            $(document).on('click', '.view-item', function (e) {
+              let itemId = $(this).data('id'); 
+              createTable(itemId)
+            })
+          </script>
+          <div class="modal-header">
+            <h4 class="modal-title" id="myViewLabel">{% trans 'User Details' %}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body">
+          <div id="tabela-container"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End View modal -->
   <script>
-    const API_DATA_LIST_URL = 'http://127.0.0.1:8000/users/?f=json'
+    function createTable(id){
+      $(document).ready(function() {
+        // URL da API
+        const apiUrl = `{% url 'api:users-list' %}?user_id=${id}`;
+
+        // Fazendo a requisição
+        $.get(apiUrl, function(data) {
+            // Montando a tabela
+            let tabelaHtml = `
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <td>${data.id}</td>
+                    </tr>
+                    <tr>
+                        <th>Nome Completo</th>
+                        <td>${data.full_name}</td>
+                    </tr>
+                    <tr>
+                        <th>Número do Documento</th>
+                        <td>${data.document_number}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>${data.email}</td>
+                    </tr>
+                    <tr>
+                        <th>Celular</th>
+                        <td>${data.cellphone}</td>
+                    </tr>
+                </table>
+            `;
+
+            // Inserindo a tabela no container
+            $('#tabela-container').html(tabelaHtml);
+        }).fail(function() {
+            // Tratamento de erro
+            $('#tabela-container').html('<p>Erro ao carregar os dados.</p>');
+        });
+    });
+    }
+  </script>
+
+  <script>
+    const API_DATA_LIST_URL = '{% url "users-list" %}?f=json'
   </script>
   <script src="{% static 'vendors/scripts/validators.js' %}"></script>
 

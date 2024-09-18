@@ -12,19 +12,18 @@ $('document').ready(function () {
 			type: 'GET',
 			contentType: 'application/json',
 			dataType: 'json',
-
 			dataSrc: function (json) {
 				for (var i = 0, ien = json.data.length; i < ien; i++) {
 					let id = json.data[i][0]; // Captura o ID do item
-
+					let urlUpdate = `${id}/update`
 					json.data[i].push(
 						'<div class="dropdown show">' +
 						'<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="true">' +
 						'<i class="dw dw-more"></i>' +
 						'</a>' +
 						'<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-						'<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>' +
-						'<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>' +
+						'<a class="dropdown-item view-item" data-toggle="modal" data-target="#modal-view" href="#" data-id="' + id + '"><i class="dw dw-eye"></i> View</a>' +
+						'<a class="dropdown-item" href=' + urlUpdate + '><i class="dw dw-edit2"></i> Edit</a>' +
 						'<a class="dropdown-item delete-item" href="#" data-id="' + id + '"><i class="dw dw-delete-3"></i> Delete</a>' +
 						'</div>' +
 						'</div>'

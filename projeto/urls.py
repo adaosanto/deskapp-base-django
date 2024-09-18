@@ -21,7 +21,7 @@ from django.contrib import admin
 from django.urls import include, path
 from ninja import NinjaAPI
 
-api = NinjaAPI(csrf=True)
+api = NinjaAPI(csrf=True, urls_namespace="api")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
